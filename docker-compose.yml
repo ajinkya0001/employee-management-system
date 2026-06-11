@@ -1,0 +1,22 @@
+services:
+
+  backend:
+    image: employee-backend:latest
+    container_name: employee-backend-container
+
+    ports:
+      - "8080:8080"
+
+    restart: always
+
+  frontend:
+    image: employee-ui:latest
+    container_name: employee-ui-container
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      - backend
+
+    restart: always
