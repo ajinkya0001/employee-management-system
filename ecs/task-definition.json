@@ -14,7 +14,20 @@
         }
       ],
       "essential": true,
-      "environment": [],
+      "environment": [
+        {
+          "name": "SPRING_DATASOURCE_URL",
+          "value": "jdbc:postgresql://employee-postgres.clums88ccm7z.ap-south-1.rds.amazonaws.com:5432/postgres"
+        },
+        {
+          "name": "SPRING_DATASOURCE_USERNAME",
+          "value": "postgres"
+        },
+        {
+          "name": "SPRING_DATASOURCE_PASSWORD",
+          "value": "postgres4321"
+        }
+      ],
       "environmentFiles": [],
       "mountPoints": [],
       "volumesFrom": [],
