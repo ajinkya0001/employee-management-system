@@ -1,0 +1,51 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "employee-service-container",
+      "image": "188217590021.dkr.ecr.ap-south-1.amazonaws.com/employee-backend:latest",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 8080,
+          "protocol": "tcp",
+          "name": "employee-service-container-8080-tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "environmentFiles": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "ulimits": [],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/employee-service-task",
+          "awslogs-create-group": "true",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "ecs"
+        },
+        "secretOptions": []
+      },
+      "systemControls": []
+    }
+  ],
+  "family": "employee-service-task",
+  "executionRoleArn": "arn:aws:iam::188217590021:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "volumes": [],
+  "placementConstraints": [],
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512",
+  "enableFaultInjection": false,
+  "tags": []
+}
