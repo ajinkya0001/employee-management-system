@@ -1,82 +1,142 @@
 # 🚀 Employee Management System
 
-A Full-Stack Employee Management System built using **React**, **Spring Boot**, and **PostgreSQL**, containerized with **Docker**, and deployed on **AWS EC2** with **Amazon RDS** as the database and **Amazon S3** for static website hosting.
+A production-style Full Stack Employee Management System built using **React**, **Spring Boot**, and **PostgreSQL**, containerized with **Docker**, deployed on **Amazon ECS (Fargate)**, with **Amazon RDS** as the managed database and automated using **Jenkins CI/CD**.
 
 ![Java](https://img.shields.io/badge/Java-21-orange)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen)
-![React](https://img.shields.io/badge/React-19-blue)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
-![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED)
-![AWS](https://img.shields.io/badge/AWS-EC2%20%7C%20RDS%20%7C%20S3-FF9900)
+![Spring Boot](https://img.shields.io/badge/SpringBoot-4.x-brightgreen)
+![React](https://img.shields.io/badge/React-Frontend-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
+![Docker](https://img.shields.io/badge/Docker-Container-blue)
+![AWS ECS](https://img.shields.io/badge/AWS-ECS-orange)
+![Jenkins](https://img.shields.io/badge/Jenkins-CI/CD-red)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
-## 📌 Project Overview
+# 📌 Project Overview
 
-The Employee Management System is a full-stack web application that allows users to manage employee records efficiently. It supports complete CRUD operations and demonstrates a production-style deployment using Docker and AWS cloud services.
+The Employee Management System is a full-stack CRUD application that allows users to manage employee records efficiently.
 
-This project was built to gain hands-on experience with enterprise application development, REST APIs, containerization, cloud deployment, and modern frontend technologies.
+This project demonstrates an **enterprise-style DevOps deployment pipeline**, including:
+
+- Spring Boot REST API
+- React Frontend
+- PostgreSQL Database
+- Docker Containerization
+- Amazon Elastic Container Registry (ECR)
+- Amazon Elastic Container Service (ECS Fargate)
+- Application Load Balancer (ALB)
+- Amazon RDS PostgreSQL
+- Jenkins CI/CD Pipeline
+
+The objective of this project was to gain practical experience with enterprise application development, cloud deployment, container orchestration, and DevOps automation.
 
 ---
 
-## ✨ Features
+# ✨ Features
 
-- ➕ Add New Employee
-- 📋 View All Employees
-- 🔍 Search Employee
-- ✏️ Update Employee Details
+- ➕ Add Employee
+- 📋 View Employees
+- ✏️ Update Employee
 - ❌ Delete Employee
-- 📱 Responsive User Interface
-- 🔗 RESTful API Integration
+- 🔍 Search Employees
+- 🌐 REST API
 - 🐳 Dockerized Backend
 - ☁️ AWS Cloud Deployment
+- 🚀 Jenkins CI/CD Pipeline
+- 📦 Container Deployment using Amazon ECS
+- 🗄️ PostgreSQL Database hosted on Amazon RDS
 
 ---
 
-## 🛠️ Tech Stack
+# 🛠️ Tech Stack
 
-### Frontend
+## Frontend
+
 - React
 - JavaScript
 - HTML5
 - CSS3
-- Axios
 - Bootstrap
+- Axios
 
-### Backend
+---
+
+## Backend
+
 - Java 21
 - Spring Boot
 - Spring Data JPA
 - REST API
 - Maven
 
-### Database
+---
+
+## Database
+
 - PostgreSQL
 - Amazon RDS
 
-### DevOps & Cloud
+---
+
+## DevOps
+
 - Docker
 - Docker Compose
-- AWS EC2
-- Amazon S3 (Static Website Hosting)
-- Git & GitHub
+- Jenkins
+- Git
+- GitHub
+- AWS CLI
+
+---
+
+## AWS Services
+
+- Amazon ECS (Fargate)
+- Amazon ECR
+- Amazon RDS
+- Application Load Balancer
+- CloudWatch
+- IAM
 
 ---
 
 # 🏗️ System Architecture
 
-```
-                 React Frontend
-                        │
-                        ▼
-                Spring Boot REST API
-                        │
-                        ▼
-                 PostgreSQL (AWS RDS)
+```text
+                    Developer
+                         │
+                    Git Push
+                         │
+                         ▼
+                     GitHub Repository
+                         │
+                         ▼
+                 Jenkins CI/CD Pipeline
+                         │
+         ┌───────────────┴────────────────┐
+         │                                │
+         ▼                                ▼
+ Build Spring Boot                  Build React
+         │
+         ▼
+ Build Docker Image
+         │
+         ▼
+ Push Image to Amazon ECR
+         │
+         ▼
+ Amazon ECS Service (Fargate)
+         │
+         ▼
+ Application Load Balancer
+         │
+         ▼
+ Spring Boot REST API
+         │
+         ▼
+ Amazon RDS PostgreSQL
 
-Frontend Hosted on Amazon S3
-Backend Hosted on AWS EC2
 ```
 
 ---
@@ -85,53 +145,60 @@ Backend Hosted on AWS EC2
 
 ```
 employee-management-system/
+
 │
-├── backend/
+├── employee-management-backend/
 │   ├── src/
 │   ├── Dockerfile
 │   ├── pom.xml
-│   └── docker-compose.yml
+│   └── mvnw
 │
-├── frontend/
+├── employee-management-ui/
 │   ├── src/
 │   ├── public/
 │   ├── package.json
-│   └── vite.config.js
+│   └── Dockerfile
 │
-├── screenshots/
+├── ecs/
+│   └── task-definition.json
+│
+├── Jenkinsfile
+│
+├── docker-compose.yml
+│
 ├── README.md
+│
 └── .gitignore
 ```
 
 ---
 
-# 🚀 API Endpoints
+# 🚀 REST API Endpoints
 
 | Method | Endpoint | Description |
-|---------|----------|-------------|
+|----------|----------------------|----------------|
 | GET | /employees | Get All Employees |
-| GET | /employees/{id} | Get Employee By ID |
 | POST | /employees | Add Employee |
 | PUT | /employees/{id} | Update Employee |
 | DELETE | /employees/{id} | Delete Employee |
 
 ---
 
-# 🐳 Docker Setup
+# 🐳 Docker
 
-## Build Docker Image
-
-```bash
-docker build -t employee-management-system .
-```
-
-## Run Container
+## Build Backend
 
 ```bash
-docker run -d -p 8080:8080 employee-management-system
+docker build -t employee-backend .
 ```
 
-Or using Docker Compose
+Run Container
+
+```bash
+docker run -p 8080:8080 employee-backend
+```
+
+Using Docker Compose
 
 ```bash
 docker-compose up -d
@@ -143,50 +210,58 @@ docker-compose up -d
 
 ## Backend
 
-- Hosted on AWS EC2
-- Spring Boot application running inside Docker
-- Reverse proxy (optional) using Nginx
-
-## Database
-
-- PostgreSQL hosted on Amazon RDS
-
-## Frontend
-
-- React production build hosted on Amazon S3 Static Website Hosting
+- Spring Boot Docker Container
+- Amazon ECS (Fargate)
+- Application Load Balancer
 
 ---
 
-# ⚙️ Installation
+## Container Registry
+
+Amazon Elastic Container Registry (ECR)
+
+---
+
+## Database
+
+Amazon RDS PostgreSQL
+
+---
+
+## Monitoring
+
+Amazon CloudWatch Logs
+
+---
+
+# ⚙️ Local Setup
 
 ## Clone Repository
 
 ```bash
 git clone https://github.com/ajinkya0001/employee-management-system.git
-```
 
-```bash
 cd employee-management-system
 ```
 
 ---
 
-## Backend Setup
+## Backend
 
 ```bash
-cd backend
+cd employee-management-backend
 
-mvn clean install
+./mvnw clean install
 
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 ---
 
-## Frontend Setup
+## Frontend
 
 ```bash
-cd frontend
+cd employee-management-ui
 
 npm install
 
@@ -195,35 +270,97 @@ npm run dev
 
 ---
 
+# 🚀 CI/CD Pipeline
+
+The project uses Jenkins Pipeline for automated deployment.
+
+Pipeline Flow
+
+```text
+GitHub Push
+
+↓
+
+Checkout Source
+
+↓
+
+Build Spring Boot
+
+↓
+
+Run Tests
+
+↓
+
+Build Docker Image
+
+↓
+
+Push Image to Amazon ECR
+
+↓
+
+Register ECS Task Definition
+
+↓
+
+Deploy to Amazon ECS
+
+↓
+
+Application Load Balancer
+
+↓
+
+Production
+```
+
+---
+
 # 📸 Screenshots
 
-> Add screenshots here after uploading them.
+Add screenshots here.
 
-Example:
+Example
 
 ```
 screenshots/
-    home.png
-    add-employee.png
-    update-employee.png
+
+home.png
+
+add-employee.png
+
+employees.png
+
+ecs-service.png
+
+jenkins-pipeline.png
+
+cloudwatch-logs.png
 ```
 
 ---
 
 # 🎯 Learning Outcomes
 
-Through this project, I gained practical experience in:
+This project helped me gain practical experience with:
 
-- Spring Boot REST API Development
-- React Frontend Development
-- PostgreSQL Database Integration
+- Spring Boot REST APIs
+- React Development
+- PostgreSQL Integration
 - Spring Data JPA
-- Docker Containerization
-- AWS EC2 Deployment
-- Amazon RDS Configuration
-- Amazon S3 Static Website Hosting
-- REST API Testing using Postman
-- Git & GitHub Workflow
+- Docker
+- Docker Compose
+- Amazon ECS
+- Amazon ECR
+- Amazon RDS
+- Application Load Balancer
+- CloudWatch Logs
+- Jenkins CI/CD
+- Git & GitHub
+- AWS IAM
+- Containerized Deployments
 
 ---
 
@@ -232,30 +369,38 @@ Through this project, I gained practical experience in:
 - JWT Authentication
 - Spring Security
 - Role-Based Access Control
-- Pagination & Sorting
-- Search & Filtering
+- Pagination
+- Sorting
+- Search Filters
 - Unit Testing
-- CI/CD using GitHub Actions
-- Monitoring with AWS CloudWatch
+- Integration Testing
+- Terraform Infrastructure
+- Kubernetes Deployment (Amazon EKS)
+- SonarQube Integration
+- Prometheus & Grafana Monitoring
 
 ---
 
 # 👨‍💻 Author
 
-### Ajinkya Jadkar
+**Ajinkya Jadkar**
 
-📧 Email: ajinkyajadkar01@gmail.com
+📧 Email
 
-💼 LinkedIn:
+ajinkyajadkar01@gmail.com
+
+🔗 LinkedIn
+
 https://www.linkedin.com/in/ajinkya-jadkar-6b4b6b229/
 
-🐙 GitHub:
+🐙 GitHub
+
 https://github.com/ajinkya0001
 
 ---
 
-## ⭐ Support
+# ⭐ Support
 
-If you found this project helpful, please consider giving it a ⭐ on GitHub!
+If you found this project useful, please consider giving it a ⭐ on GitHub.
 
-It helps others discover the project and motivates me to build more.
+It motivates me to continue building production-ready cloud and DevOps projects.
