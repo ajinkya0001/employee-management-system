@@ -324,23 +324,7 @@ Add screenshots here.
 
 Example
 
-```
-screenshots/
-
-home.png
-
-add-employee.png
-
-employees.png
-
-ecs-service.png
-
-jenkins-pipeline.png
-
-cloudwatch-logs.png
-```
-
----
+<img width="1919" height="1077" alt="image" src="https://github.com/user-attachments/assets/32686fca-b7db-48a3-959b-6419e41f283f" />
 
 # 🎯 Learning Outcomes
 
